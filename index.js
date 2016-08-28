@@ -14,13 +14,13 @@ var gtk = ffi.Library('libgtk-3', {
     gtk_application_window_new: [GtkObjectPointer, [GtkObjectPointer]]
 });
 
+var destroyCallback = ffi.Callback('void', [], function() {
+    console.log('window destroyed');
+});
+
 var activateCallback = ffi.Callback('void', [], function() {
     var window = gtk.gtk_application_window_new(app);
     gtk.gtk_widget_show_all(window);
-
-    var destroyCallback = ffi.Callback('void', [], function() {
-        console.log('window destroyed');
-    });
 
     // this code will cause a segfault AFTER it is called
     gtk.g_signal_connect_data(window, 'destroy', destroyCallback, null, null, 0);
