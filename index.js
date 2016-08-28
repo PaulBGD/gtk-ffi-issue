@@ -6,7 +6,7 @@ var FunctionPointer = ffi.Function(ref.types.void, []);
 
 var gtk = ffi.Library('libgtk-3', {
     gtk_application_new: [GtkObjectPointer, ['string', 'int']],
-    g_signal_connect_data: ['void', [GtkObjectPointer, 'string', FunctionPointer, 'void', 'void', 'int']],
+    g_signal_connect_data: ['void', [GtkObjectPointer, 'string', FunctionPointer, 'pointer', 'pointer', 'int']],
     g_application_run: ['int', [GtkObjectPointer, 'int', 'string']],
     g_object_unref: ['void', [GtkObjectPointer]],
 
